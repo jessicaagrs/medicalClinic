@@ -1,0 +1,7 @@
+.next
+.github
+public
+node_modules
+coverage
+.vscode
+.env
