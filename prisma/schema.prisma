@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  name      String
+  password  String
+  telephone String
+  havePlan  Boolean
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  plans     UserPlan[]
+  address   Address    @relation(fields: [addressId], references: [id])
+  addressId String
+}
+
+model Plan {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  users       UserPlan[]
+  specialists SpecialistPlan[]
+}
+
+model UserPlan {
+  userId   String
+  planId   String
+  planDesc String
+  user     User   @relation(fields: [userId], references: [id])
+  plan     Plan   @relation(fields: [planId], references: [id])
+
+  @@id([userId, planId])
+}
+
+model Clinic {
+  id         String       @id @default(uuid())
+  name       String
+  cnpj       String       @unique
+  email      String
+  password   String
+  telephone  String
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @default(now())
+  address    Address      @relation(fields: [addressId], references: [id])
+  addressId  String
+  Specialist Specialist[]
+}
+
+model Specialist {
+  id        String           @id @default(uuid())
+  name      String
+  email     String           @unique
+  password  String
+  telephone String
+  specialty String
+  urlPhoto  String
+  crm       String
+  meetsPlan Boolean
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @default(now())
+  plans     SpecialistPlan[]
+  address   Address          @relation(fields: [addressId], references: [id])
+  addressId String
+  clinic    Clinic           @relation(fields: [clinicId], references: [id])
+  clinicId  String
+}
+
+model SpecialistPlan {
+  specialistId String
+  planId       String
+  planDesc     String
+  specialist   Specialist @relation(fields: [specialistId], references: [id])
+  plan         Plan       @relation(fields: [planId], references: [id])
+
+  @@id([specialistId, planId])
+}
+
+model Address {
+  id          String       @id @default(uuid())
+  street      String
+  numHouse    Int
+  state       String
+  complement  String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+  users       User[]
+  clinics     Clinic[]
+  specialists Specialist[]
+}
