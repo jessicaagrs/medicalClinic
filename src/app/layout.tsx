@@ -8,7 +8,7 @@ const publicSans = Public_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Clínica Médica Dev',
+  title: 'Clínica Médica Voll',
   description: 'Agendamento de consulta e cadastro de profissionais médicos',
 };
 
@@ -19,6 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
+      <head>
+        <link rel="shortcut icon" href="/Logo.svg" type="image/x-icon" />
+      </head>
       <body className={`${publicSans.variable} antialiased`}>{children}</body>
     </html>
   );
