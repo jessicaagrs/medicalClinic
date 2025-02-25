@@ -13,6 +13,7 @@ export default {
         custom20: '#90989F',
         custom30: '#FFFFFF',
         custom40: '#E7EBEF',
+        custom50: '#339CFF',
       },
     },
   },
