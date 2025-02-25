@@ -8,7 +8,12 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {},
+      colors: {
+        custom10: '#0B3B60',
+        custom20: '#90989F',
+        custom30: '#FFFFFF',
+        custom40: '#E7EBEF',
+      },
     },
   },
   plugins: [],
