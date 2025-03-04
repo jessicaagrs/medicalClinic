@@ -10,7 +10,7 @@
     "lint:prettier:check": "prettier . --check",
     "lint:prettier:write": "prettier . --write",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watchAll --runInBand --verbose"
   },
   "dependencies": {
     "@prisma/client": "^6.4.1",

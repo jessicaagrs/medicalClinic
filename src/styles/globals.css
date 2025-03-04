@@ -6,6 +6,11 @@
   --background: #ffffff;
 }
 
+.full-width-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 body {
   background: var(--background);
   font-family:
