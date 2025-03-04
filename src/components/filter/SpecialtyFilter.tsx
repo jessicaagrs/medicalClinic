@@ -4,7 +4,7 @@ export default function SpecialtyFilter() {
       <p className=" font-semibold text-base">
         Você pode estar procurando por estas categorias:
       </p>
-      <ul className="flex gap-5 text-sm">
+      <ul className="flex flex-wrap  gap-5 text-sm">
         <li className="bg-custom40 px-3 py-1 rounded-md">
           <button className="flex items-center gap-3">
             Neurologista <span>X</span>

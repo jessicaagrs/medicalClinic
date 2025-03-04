@@ -1,7 +1,7 @@
 export default function Testimonials() {
   return (
     <section className="full-width-container">
-      <div className="mt-10 flex flex-col items-center justify-center gap-5">
+      <div className="mt-10 px-10 lg:px-0 flex flex-col items-center justify-center gap-5">
         <h3 className="text-2xl text-custom10 font-bold">Depoimentos</h3>
         <div className="max-w-3xl border-b-2 border-custom40 flex flex-col justify-center items-center gap-4">
           <p className="text-custom90">

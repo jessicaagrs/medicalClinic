@@ -25,7 +25,7 @@ export const SearchHeader = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="hidden sm:block relative">
       <Input
         classname="border border-custom20 outline-transparent focus:outline-2 focus:outline-offset-2 focus:outline-custom20 h-10 rounded-lg px-3 py-5"
         type="search"

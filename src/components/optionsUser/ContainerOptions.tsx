@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function ContainerOptions() {
   return (
     <section className="full-width-container text-custom10">
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
         <a
           className="flex flex-col items-center gap-3 w-72 max-w-72 bg-custom40 py-5 px-3 rounded-lg shadow-md"
           href="/specialists"

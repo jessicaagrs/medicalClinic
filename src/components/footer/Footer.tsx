@@ -17,7 +17,7 @@ export default function Footer() {
           <Image src="/Instagram.svg" alt="Instagram" width={20} height={20} />
         </a>
       </div>
-      <p className='text-sm'>
+      <p className="sm:text-sm text-xs px-3 sm:px-0">
         © 2025 Desenvolvido por{' '}
         <a href="https://github.com/jessicaagrs" target="_blank">
           @jessagrs
