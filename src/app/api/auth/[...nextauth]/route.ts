@@ -1,10 +1,17 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
+import prisma from '../../../../../prisma/db';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 const handler = NextAuth({
-  pages: {
-    signIn: '/login',
+  // pages: {
+  //   signIn: '/login',
+  // },
+  adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: 'jwt',
+    maxAge: 3000,
   },
   providers: [
     GoogleProvider({
@@ -30,17 +37,13 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      if (account?.provider === 'google') {
-        console.log('Google credentials:', {
-          user,
-          account,
-          profile,
-          email,
-          credentials,
-        });
+    async session({ session, token }) {
+      console.log("Sessão", session);
+      console.log("Token", token);
+      if (session?.user) {
+        session.user.email = token.email!;
       }
-      return true;
+      return session;
     },
   },
 });
