@@ -17,7 +17,12 @@ export default function ButtonInput({
 }: ButtonInputProps) {
   return (
     <button className={classname} onClick={onClick}>
-      <Image src={seeCancelButton ? '/Cancel.svg' : iconSrc} alt={iconAlt} width={20} height={20} />
+      <Image
+        src={seeCancelButton ? '/Cancel.svg' : iconSrc}
+        alt={iconAlt}
+        width={20}
+        height={20}
+      />
     </button>
   );
 }

@@ -17,6 +17,7 @@ export default {
         custom60: '#EDEDED',
         custom70: '#F8F8F8',
         custom80: '#6B6E71',
+        custom90: '#90989F',
       },
     },
   },
