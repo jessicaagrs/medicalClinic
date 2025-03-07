@@ -7,9 +7,9 @@ import Testimonials from '@/components/testimonials/Testimonials';
 import { getServerSession } from 'next-auth';
 
 export default async function Home() {
-   const session = await getServerSession();
+  const session = await getServerSession();
 
-   console.log("Aqui", session);
+  console.log('Aqui', session);
 
   return (
     <>

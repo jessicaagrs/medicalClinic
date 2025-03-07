@@ -5,7 +5,7 @@ import { User } from '@/interfaces/IUser';
 import { revalidatePath } from 'next/cache';
 import prisma from '../../prisma/db';
 
-export async function create(data: User, plan?: PlanRelationUser) {
+async function create(data: User, plan?: PlanRelationUser) {
   const newUser = await prisma.user.create({
     data: {
       email: data.email,
@@ -29,3 +29,7 @@ export async function create(data: User, plan?: PlanRelationUser) {
 
   revalidatePath('/');
 }
+
+export const userActions = {
+  create,
+};

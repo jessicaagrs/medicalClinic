@@ -1,13 +1,14 @@
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import prisma from '../../../../../prisma/db';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { loginActions } from '@/actions/loginActions';
 
 const handler = NextAuth({
-  // pages: {
-  //   signIn: '/login',
-  // },
+  pages: {
+    signIn: '/login',
+  },
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt',
@@ -21,25 +22,27 @@ const handler = NextAuth({
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        email: { label: 'Username', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        console.log(credentials);
-        const user = { id: '1', name: 'J Smith', email: 'jsmith@example.com' };
+        if (!credentials) {
+          throw new Error('Credenciais não fornecidas.');
+        }
 
-        if (user) {
+        try {
+          const { email, password } = credentials;
+          const user = await loginActions.login(email, password);
+
           return user;
-        } else {
-          return null;
+        } catch (error: any) {
+          throw new Error(error.message || 'Erro ao autenticar.');
         }
       },
     }),
   ],
   callbacks: {
     async session({ session, token }) {
-      console.log("Sessão", session);
-      console.log("Token", token);
       if (session?.user) {
         session.user.email = token.email!;
       }
