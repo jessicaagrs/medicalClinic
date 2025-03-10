@@ -2,6 +2,9 @@
 
 import Button from '@/components/globals/Button';
 import Input from '@/components/globals/Input';
+import { Loading } from '@/components/loading/Loading';
+import { useLoading } from '@/hooks/useLoading';
+import { useModal } from '@/hooks/useModal';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -12,6 +15,9 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
+  const { isOpen, componentModalError, openModal } = useModal();
+  const { isLoading, renderLoading, stopLoading, componentLoading } =
+    useLoading();
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -25,7 +31,8 @@ export default function Login() {
     e.preventDefault();
 
     if (!email || !password) {
-      alert('Preencha todos os campos');
+      setError('Preencha todos os campos.');
+      openModal();
       return;
     }
 
@@ -34,14 +41,19 @@ export default function Login() {
       password,
     };
 
+    renderLoading();
+
     const result = await signIn('credentials', {
       ...data,
       redirect: false,
     });
 
-    if (result) {
-      console.error(result);
+    if (!result?.ok) {
+      setError(result?.error ?? 'Erro ao fazer login.');
+      openModal();
+      stopLoading();
     } else {
+      stopLoading();
       router.push('/dashboard');
     }
   };
@@ -82,7 +94,9 @@ export default function Login() {
             />
           </div>
           <div className="flex flex-col items-center gap-2 mt-5">
-            <Button width="w-64">Entrar</Button>
+            <Button width="w-64">
+              {isLoading ? componentLoading() : 'Entrar'}
+            </Button>
           </div>
           <div className="flex flex-col items-center gap-2 mt-5">
             <a href="/resetPassword" className="text-sm text-custom10">
@@ -102,6 +116,7 @@ export default function Login() {
           </div>
         </div>
       </form>
+      {isOpen && componentModalError('Erro ao efetuar login', error)}
     </main>
   );
 }

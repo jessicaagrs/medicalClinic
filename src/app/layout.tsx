@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Public_Sans } from 'next/font/google';
 import '../styles/globals.css';
+import DefaultProvider from '@/contexts/DefaultProvider';
 
 const publicSans = Public_Sans({
   variable: '--font-public-sans',
@@ -22,7 +23,9 @@ export default function RootLayout({
       <head>
         <link rel="shortcut icon" href="/Logo.svg" type="image/x-icon" />
       </head>
-      <body className={`${publicSans.variable} antialiased`}>{children}</body>
+      <body className={`${publicSans.variable} antialiased`}>
+        <DefaultProvider>{children}</DefaultProvider>
+      </body>
     </html>
   );
 }

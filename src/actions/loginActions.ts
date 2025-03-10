@@ -12,7 +12,7 @@ async function login(email: string, password: string) {
   }
 
   if (user.password !== password) {
-    throw new Error('Credenciais inválidas');
+    throw new Error('Credenciais inválidas.');
   }
 
   return user;

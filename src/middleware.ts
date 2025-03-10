@@ -7,9 +7,11 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (pathname === '/' || pathname === '/login' || pathname === '/cadastro') {
+    if (token && pathname === '/') {
+      return NextResponse.redirect(new URL('/dashboard', req.url));
+    }
     return NextResponse.next();
   }
-
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/favicon.ico') ||
