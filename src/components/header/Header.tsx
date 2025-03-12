@@ -15,6 +15,10 @@ export default function Header() {
     router.push('/login');
   };
 
+  const handleClickAcessClinic = () => {
+    router.push('/login?clinic=true');
+  };
+
   return (
     <nav className="full-width-container">
       <header className="py-6 px-4 lg:px-0 flex justify-between items-center">
@@ -40,7 +44,12 @@ export default function Header() {
           {session?.user ? (
             <MenuUser />
           ) : (
-            <Button onClick={handleClickLogin}>Login</Button>
+            <>
+              <Button onClick={handleClickLogin}>Login</Button>
+              <Button onClick={handleClickAcessClinic} width="w-36">
+                Acesso Clínica
+              </Button>
+            </>
           )}
         </div>
       </header>

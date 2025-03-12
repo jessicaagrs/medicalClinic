@@ -24,6 +24,7 @@ const handler = NextAuth({
       credentials: {
         email: { label: 'Username', type: 'text' },
         password: { label: 'Password', type: 'password' },
+        clinic: { label: 'Clinic', type: 'text' },
       },
       async authorize(credentials) {
         if (!credentials) {
@@ -31,10 +32,11 @@ const handler = NextAuth({
         }
 
         try {
-          const { email, password } = credentials;
-          const user = await loginActions.login(email, password);
+          const { email, password, clinic } = credentials;
+          const user = await loginActions.login(email, password, clinic);
 
           return user;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           throw new Error(error.message || 'Erro ao autenticar.');
         }

@@ -20,12 +20,12 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
-  telephone     String
-  havePlan      Boolean
+  telephone     String?
+  havePlan      Boolean?
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
-  addressId     String
-  address       Address    @relation(fields: [addressId], references: [id])
+  addressId     String?
+  address       Address?    @relation(fields: [addressId], references: [id])
   plans         UserPlan[]
   accounts      Account[]
   sessions      Session[]
@@ -64,6 +64,13 @@ model Clinic {
   Specialist Specialist[]
 }
 
+
+enum Role {
+  ADMIN
+  DOCTOR
+  RECEPTIONIST
+}
+
 model Specialist {
   id        String           @id @default(uuid())
   name      String
@@ -73,6 +80,7 @@ model Specialist {
   specialty String
   urlPhoto  String
   crm       String
+  role      Role
   meetsPlan Boolean
   createdAt DateTime         @default(now())
   updatedAt DateTime         @default(now())
