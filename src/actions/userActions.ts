@@ -1,9 +1,7 @@
-'use server';
-
 import { PlanRelationUser } from '@/interfaces/IPlan';
 import { User } from '@/interfaces/IUser';
 import { revalidatePath } from 'next/cache';
-import prisma from '../../prisma/db';
+import { prisma } from '../../prisma/db';
 
 async function create(data: User, plan?: PlanRelationUser) {
   const newUser = await prisma.user.create({

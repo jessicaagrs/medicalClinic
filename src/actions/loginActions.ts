@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import prisma from '../../prisma/db';
+import { prisma } from '../../prisma/db';
 
 async function login(email: string, password: string, clinic?: string) {
   let user;

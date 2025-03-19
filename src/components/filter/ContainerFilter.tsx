@@ -31,6 +31,7 @@ export default function ContainerFilter() {
             type="text"
             value={searchSpecialty}
             onChange={handleOnChangeSearch}
+            aria-label="Buscar especialidade"
           />
         </div>
         <div className="flex max-w-[300px] sm:max-w-96 items-center shadow-md rounded-lg relative">
@@ -47,6 +48,7 @@ export default function ContainerFilter() {
             type="text"
             value={searchLocation}
             onChange={(event) => setSearchLocation(event.target.value)}
+            aria-label="Buscar localização"
           />
         </div>
         <Button height="h-12" width="max-w-[300px] w-96 md:max-w-24">

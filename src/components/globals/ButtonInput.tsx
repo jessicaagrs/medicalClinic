@@ -22,6 +22,7 @@ export default function ButtonInput({
         alt={iconAlt}
         width={20}
         height={20}
+        aria-label={seeCancelButton ? 'cancel' : 'search'}
       />
     </button>
   );

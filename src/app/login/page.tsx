@@ -66,7 +66,11 @@ export default function Login() {
   return (
     <main className="bg-[url(/Background.png)] h-screen flex justify-center">
       <div className="bg-custom30 w-full sm:max-w-[700px] flex flex-col items-center">
-        <form onSubmit={handleSubmitLogin} className="mb-4">
+        <form
+          onSubmit={handleSubmitLogin}
+          className="mb-4"
+          data-testid="login-form"
+        >
           <div className="mt-10 flex flex-col items-center gap-14">
             <Image src="/Logo.svg" alt="Logo" width={140} height={40} />
             <h1 className="text-base sm:text-2xl font-bold text-center text-custom80">
@@ -77,6 +81,7 @@ export default function Login() {
             <div className="flex flex-col gap-2 mt-10">
               <label htmlFor="email">Email</label>
               <Input
+                id="email"
                 classname="h-12 pl-5 bg-custom70 outline-none rounded-lg"
                 name="email"
                 type="text"
@@ -88,6 +93,7 @@ export default function Login() {
             <div className="flex flex-col gap-2 mt-5">
               <label htmlFor="password">Senha</label>
               <Input
+                id="password"
                 classname="h-12 pl-5 bg-custom70 outline-none rounded-lg"
                 name="password"
                 type="password"
@@ -97,14 +103,18 @@ export default function Login() {
               />
             </div>
             <div className="flex flex-col items-center gap-2 mt-5">
-              <Button width="w-64">
+              <Button width="w-64" ariaLabel="Entrar">
                 {isLoading ? componentLoading() : 'Entrar'}
               </Button>
             </div>
           </div>
         </form>
         {!clinic && (
-          <Button width="w-64" onClick={handleGoogleLogin}>
+          <Button
+            width="w-64"
+            onClick={handleGoogleLogin}
+            ariaLabel="Entrar com Google"
+          >
             {isLoadingGoogle ? (
               'Aguarde...'
             ) : (

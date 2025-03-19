@@ -7,7 +7,7 @@ export default function MenuUser() {
   };
 
   return (
-    <div>
+    <div data-testid="menu-user">
       <button
         onClick={handleClick}
         className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 transition duration-200"
