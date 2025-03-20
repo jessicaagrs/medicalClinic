@@ -1,11 +1,9 @@
-import { getServerSession } from 'next-auth';
+import Header from '@/components/header/Header';
 
 export default async function Dashboard() {
-  const session = await getServerSession();
   return (
-    <div>
-      <p>{session?.expires}</p>
-      Página Dash
-    </div>
+    <main>
+      <Header />
+    </main>
   );
 }
