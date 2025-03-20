@@ -8,14 +8,14 @@ describe('SearchHeader', () => {
     jest.clearAllMocks();
   });
 
-  test('deve renderizar o componente corretamente', () => {
+  test('should render the component correctly', () => {
     render(<SearchHeader />);
 
     expect(screen.getByPlaceholderText('Digite sua busca')).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  test('deve atualizar o valor do input quando digitado', () => {
+  test('should update the input value when typed', () => {
     render(<SearchHeader />);
 
     const searchInput = screen.getByPlaceholderText('Digite sua busca');
@@ -24,7 +24,7 @@ describe('SearchHeader', () => {
     expect(searchInput).toHaveValue('teste');
   });
 
-  test('deve mostrar o botão de cancelar quando houver texto no input', () => {
+  test('should show the cancel button when there is text in the input', () => {
     render(<SearchHeader />);
 
     const searchInput = screen.getByPlaceholderText('Digite sua busca');
@@ -33,7 +33,7 @@ describe('SearchHeader', () => {
     expect(screen.getByLabelText('cancel')).toBeInTheDocument();
   });
 
-  test('deve chamar a função de busca quando pressionar Enter', () => {
+  test('should call the search function when pressing Enter', () => {
     const consoleSpy = jest.spyOn(console, 'log');
     render(<SearchHeader />);
 
@@ -44,7 +44,7 @@ describe('SearchHeader', () => {
     expect(consoleSpy).toHaveBeenCalled();
   });
 
-  test('deve chamar a função de busca quando clicar no botão', () => {
+  test('should call the search function when clicking the button', () => {
     const consoleSpy = jest.spyOn(console, 'log');
     render(<SearchHeader />);
 

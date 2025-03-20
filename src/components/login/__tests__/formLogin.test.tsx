@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import Login from '../page';
+import LoginForm from '../../login/FormLogin';
 
 jest.mock('next-auth/react');
 jest.mock('next/navigation', () => ({
@@ -22,7 +22,7 @@ describe('Login Component', () => {
   });
 
   test('should renders login form elements', () => {
-    render(<Login />);
+    render(<LoginForm />);
 
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/senha/i)).toBeInTheDocument();
@@ -33,7 +33,7 @@ describe('Login Component', () => {
   });
 
   test('should shows error message when email or password is empty', async () => {
-    render(<Login />);
+    render(<LoginForm />);
 
     fireEvent.click(screen.getByRole('button', { name: 'Entrar' }));
 
@@ -43,7 +43,7 @@ describe('Login Component', () => {
   });
 
   test('should handles input changes', () => {
-    render(<Login />);
+    render(<LoginForm />);
 
     const emailInput = screen.getByLabelText(/email/i);
     const passwordInput = screen.getByLabelText(/senha/i);
@@ -56,7 +56,7 @@ describe('Login Component', () => {
   });
 
   test('should shows error when submitting empty form', async () => {
-    render(<Login />);
+    render(<LoginForm />);
 
     fireEvent.submit(screen.getByTestId('login-form'));
 
@@ -68,7 +68,7 @@ describe('Login Component', () => {
   test('should handles successful login', async () => {
     (signIn as jest.Mock).mockResolvedValueOnce({ ok: true });
 
-    render(<Login />);
+    render(<LoginForm />);
 
     const emailInput = screen.getByLabelText(/email/i);
     const passwordInput = screen.getByLabelText(/senha/i);
@@ -88,7 +88,7 @@ describe('Login Component', () => {
       error: 'Invalid credentials',
     });
 
-    render(<Login />);
+    render(<LoginForm />);
 
     const emailInput = screen.getByLabelText(/email/i);
     const passwordInput = screen.getByLabelText(/senha/i);
@@ -103,7 +103,7 @@ describe('Login Component', () => {
   });
 
   test('should handles Google login', async () => {
-    render(<Login />);
+    render(<LoginForm />);
 
     const googleButton = screen.getByText(/entrar com google/i);
     fireEvent.click(googleButton);
