@@ -1,10 +1,18 @@
+import { loginActions } from '@/actions/loginActions';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
+import { prisma } from '../../../../../prisma/db';
 
 const handler = NextAuth({
   pages: {
     signIn: '/login',
+  },
+  adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: 'jwt',
+    maxAge: 3000,
   },
   providers: [
     GoogleProvider({
@@ -14,33 +22,33 @@ const handler = NextAuth({
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        email: { label: 'Username', type: 'text' },
         password: { label: 'Password', type: 'password' },
+        clinic: { label: 'Clinic', type: 'text' },
       },
       async authorize(credentials) {
-        console.log(credentials);
-        const user = { id: '1', name: 'J Smith', email: 'jsmith@example.com' };
+        if (!credentials) {
+          throw new Error('Credenciais não fornecidas.');
+        }
 
-        if (user) {
+        try {
+          const { email, password, clinic } = credentials;
+          const user = await loginActions.login(email, password, clinic);
+
           return user;
-        } else {
-          return null;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+          throw new Error(error.message || 'Erro ao autenticar.');
         }
       },
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      if (account?.provider === 'google') {
-        console.log('Google credentials:', {
-          user,
-          account,
-          profile,
-          email,
-          credentials,
-        });
+    async session({ session, token }) {
+      if (session?.user) {
+        session.user.email = token.email!;
       }
-      return true;
+      return session;
     },
   },
 });
