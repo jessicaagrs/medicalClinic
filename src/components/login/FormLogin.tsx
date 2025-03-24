@@ -62,7 +62,7 @@ export default function FormLogin({ clinic }: { readonly clinic?: string }) {
   };
 
   return (
-    <main className="bg-[url(/Background.png)] h-screen flex justify-center">
+    <main className="bg-[url(/background/Background.png)] h-screen flex justify-center">
       <div className="bg-custom30 w-full sm:max-w-[700px] flex flex-col items-center">
         <form
           onSubmit={handleSubmitLogin}
@@ -70,7 +70,7 @@ export default function FormLogin({ clinic }: { readonly clinic?: string }) {
           data-testid="login-form"
         >
           <div className="mt-10 flex flex-col items-center gap-14">
-            <Image src="/Logo.svg" alt="Logo" width={140} height={40} />
+            <Image src="/icons/Logo.svg" alt="Logo" width={140} height={40} />
             <h1 className="text-base sm:text-2xl font-bold text-center text-custom80">
               Faça login em sua conta
             </h1>
@@ -117,7 +117,7 @@ export default function FormLogin({ clinic }: { readonly clinic?: string }) {
               'Aguarde...'
             ) : (
               <>
-                <Image src="/Google.svg" alt="Google" width={20} height={20} />
+                <Image src="/icons/Google.svg" alt="Google" width={20} height={20} />
                 <span className="ml-2">Entrar com Google</span>
               </>
             )}

@@ -6,16 +6,16 @@ export default function Footer() {
     <footer className="mt-10 h-28 bg-custom10 text-custom30 flex flex-col items-center justify-center gap-4">
       <div className="flex gap-4 items-center">
         <Link href="https://www.facebook.com/" target="_blank">
-          <Image src="/Facebook.svg" alt="Facebook" width={12} height={12} />
+          <Image src="/icons/Facebook.svg" alt="Facebook" width={12} height={12} />
         </Link>
         <Link href="https://www.whatsapp.com/" target="_blank">
-          <Image src="/Whatsapp.svg" alt="WhatsApp" width={20} height={20} />
+          <Image src="/icons/Whatsapp.svg" alt="WhatsApp" width={20} height={20} />
         </Link>
         <Link href="https://www.google.com/" target="_blank">
-          <Image src="/Google.svg" alt="Google" width={20} height={20} />
+          <Image src="/icons/Google.svg" alt="Google" width={20} height={20} />
         </Link>
         <Link href="https://www.instagram.com/" target="_blank">
-          <Image src="/Instagram.svg" alt="Instagram" width={20} height={20} />
+          <Image src="/icons/Instagram.svg" alt="Instagram" width={20} height={20} />
         </Link>
       </div>
       <p className="sm:text-sm text-xs px-3 sm:px-0">
