@@ -20,7 +20,7 @@ export default function ErrorBoundary({
     <div className="h-screen flex flex-col gap-5 items-center justify-center">
       <h2>Ops... ocorreu um erro.</h2>
       <p>{`Detalhes: ${error.message}`}</p>
-      <Image src="/Error.svg" width={150} height={150} alt="Error" />
+      <Image src="/icons/Error.svg" width={150} height={150} alt="Error" />
       <Button onClick={() => reset()} width="w-40">
         Tentar novamente
       </Button>

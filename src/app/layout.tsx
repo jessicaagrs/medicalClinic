@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <head>
-        <link rel="shortcut icon" href="/Logo.svg" type="image/x-icon" />
+        <link rel="shortcut icon" href="/icons/Logo.svg" type="image/x-icon" />
       </head>
       <body className={`${publicSans.variable} antialiased`}>
         <DefaultProvider>{children}</DefaultProvider>

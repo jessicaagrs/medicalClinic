@@ -11,14 +11,14 @@ type ButtonInputProps = {
 export default function ButtonInput({
   onClick,
   classname,
-  iconSrc = '/Search.svg',
+  iconSrc = '/icons/Search.svg',
   iconAlt = 'search',
   seeCancelButton = false,
 }: ButtonInputProps) {
   return (
     <button className={classname} onClick={onClick}>
       <Image
-        src={seeCancelButton ? '/Cancel.svg' : iconSrc}
+        src={seeCancelButton ? '/icons/Cancel.svg' : iconSrc}
         alt={iconAlt}
         width={20}
         height={20}
