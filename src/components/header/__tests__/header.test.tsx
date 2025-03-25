@@ -1,10 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Header from '../Header';
 
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
+  usePathname: jest.fn(),
 }));
 
 jest.mock('next-auth/react', () => ({
@@ -48,6 +49,8 @@ describe('Header', () => {
       data: null,
       status: 'unauthenticated',
     });
+
+    (usePathname as jest.Mock).mockReturnValue('/');
 
     render(<Header />);
 

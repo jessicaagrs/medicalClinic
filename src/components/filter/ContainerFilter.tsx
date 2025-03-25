@@ -22,7 +22,12 @@ export default function ContainerFilter() {
             className="w-12 h-12 flex justify-center items-center bg-custom60
             rounded-l-lg absolute -left-2"
           >
-            <Image src="/Search.svg" alt="search" width={20} height={20} />
+            <Image
+              src="/icons/Search.svg"
+              alt="search"
+              width={20}
+              height={20}
+            />
           </div>
           <Input
             classname="h-12 max-w-[300px] w-96 pl-12 bg-custom70 outline-none rounded-r-lg focus:shadow-md focus:shadow-custom90"
@@ -39,7 +44,12 @@ export default function ContainerFilter() {
             className="w-12 h-12 flex justify-center items-center bg-custom60
             rounded-l-lg absolute -left-2"
           >
-            <Image src="/Location.svg" alt="location" width={20} height={20} />
+            <Image
+              src="/icons/Location.svg"
+              alt="location"
+              width={20}
+              height={20}
+            />
           </div>
           <Input
             classname="h-12 max-w-[300px] w-96 pl-12 bg-custom70 outline-none rounded-r-lg focus:shadow-md focus:shadow-custom90"

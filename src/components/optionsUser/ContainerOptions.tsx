@@ -9,7 +9,12 @@ export default function ContainerOptions() {
           className="flex flex-col items-center gap-3 w-72 max-w-72 bg-custom40 py-5 px-3 rounded-lg shadow-md"
           href="/specialists"
         >
-          <Image src="/Medic.svg" alt="medical icon" width={72} height={72} />
+          <Image
+            src="/icons/Medic.svg"
+            alt="medical icon"
+            width={72}
+            height={72}
+          />
           <h2>Encontre especialistas</h2>
         </Link>
         <Link
@@ -17,7 +22,7 @@ export default function ContainerOptions() {
           href="/appointments"
         >
           <Image
-            src="/Calendar.svg"
+            src="/icons/Calendar.svg"
             alt="calendar icon"
             width={72}
             height={72}
@@ -29,7 +34,7 @@ export default function ContainerOptions() {
           href="/reminders"
         >
           <Image
-            src="/Reminder.svg"
+            src="/icons/Reminder.svg"
             alt="reminder icon"
             width={72}
             height={72}
@@ -40,7 +45,12 @@ export default function ContainerOptions() {
           className="flex flex-col items-center gap-3 w-72 max-w-72 bg-custom40 py-5 px-3 rounded-lg shadow-md"
           href="/assess"
         >
-          <Image src="/Assess.svg" alt="assess icon" width={72} height={72} />
+          <Image
+            src="/icons/Assess.svg"
+            alt="assess icon"
+            width={72}
+            height={72}
+          />
           <h2>Avalie o serviço</h2>
         </Link>
       </div>
