@@ -12,7 +12,7 @@ export default function MenuUser() {
         onClick={handleClick}
         className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 transition duration-200"
       >
-        <Image src="/User.svg" alt="User Menu" width={50} height={50} />
+        <Image src="/icons/User.svg" alt="User Menu" width={50} height={50} />
       </button>
     </div>
   );
