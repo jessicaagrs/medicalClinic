@@ -117,7 +117,12 @@ export default function FormLogin({ clinic }: { readonly clinic?: string }) {
               'Aguarde...'
             ) : (
               <>
-                <Image src="/icons/Google.svg" alt="Google" width={20} height={20} />
+                <Image
+                  src="/icons/Google.svg"
+                  alt="Google"
+                  width={20}
+                  height={20}
+                />
                 <span className="ml-2">Entrar com Google</span>
               </>
             )}
