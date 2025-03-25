@@ -18,6 +18,10 @@
   transform: translateZ(0);
 }
 
+.pulse {
+  animation: pulse 1.2s ease-in-out;
+}
+
 @layer base {
   :root {
     --background: #ffffff;
@@ -120,5 +124,17 @@
       -2em 2em 0 0,
       -3em 0em 0 0,
       -2em -2em 0 0.2em;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
   }
 }

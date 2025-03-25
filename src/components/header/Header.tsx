@@ -3,13 +3,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SearchHeader } from './SearchHeader';
 import Button from '../globals/Button';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import MenuUser from '../menu/MenuUser';
 
 export default function Header() {
   const router = useRouter();
+  const pathname = usePathname();
   const { data: session } = useSession();
+  const isAboutPage = pathname === '/about';
 
   const handleClickLogin = () => {
     router.push('/login');
@@ -21,15 +23,18 @@ export default function Header() {
 
   return (
     <nav className="full-width-container">
-      <header className="py-6 px-4 lg:px-0 flex justify-between items-center">
+      <header className="py-6 px-4 lg:px-0 flex flex-col lg:flex-row justify-between items-center">
         <Image src="/icons/Logo.svg" alt="logo" width={100} height={100} />
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col lg:flex-row items-center gap-6">
           {!session?.user && (
             <>
-              <ul className="hidden sm:flex gap-6 text-custom10 text-base">
+              <ul className="flex gap-6 mt-4 lg:mt-0 text-custom10 text-base">
                 <li>
-                  <Link href="/about" className="hover:underline">
-                    Sobre
+                  <Link
+                    href={isAboutPage ? '/' : '/about'}
+                    className="hover:underline"
+                  >
+                    {isAboutPage ? 'Início' : 'Sobre'}
                   </Link>
                 </li>
                 <li>
@@ -44,12 +49,12 @@ export default function Header() {
           {session?.user ? (
             <MenuUser />
           ) : (
-            <>
+            <div className="flex gap-4">
               <Button onClick={handleClickLogin}>Login</Button>
               <Button onClick={handleClickAcessClinic} width="w-36">
                 Acesso Clínica
               </Button>
-            </>
+            </div>
           )}
         </div>
       </header>
