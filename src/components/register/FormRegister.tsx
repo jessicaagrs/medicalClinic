@@ -24,7 +24,7 @@ export default function FormRegister({ dataPlans }: FormRegisterProps) {
         <div className="mt-3 flex flex-col items-center gap-14">
           <Image src="/icons/Logo.svg" alt="Logo" width={140} height={40} />
         </div>
-        <Tabs onClickTab={setTab} selectedTab={tab} />
+        <Tabs selectedTab={tab} />
         {tab === TabNames.TYPE && <TypeForm onClickNextTab={setTab} />}
         {tab === TabNames.PERSONAL && (
           <PersonalForm onClickNextTab={setTab} options={dataPlans} />
