@@ -1,11 +1,11 @@
 'use client';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SearchHeader } from './SearchHeader';
-import Button from '../globals/Button';
 import { usePathname, useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import Button from '../globals/Button';
 import MenuUser from '../menu/MenuUser';
+import { SearchHeader } from './SearchHeader';
 
 export default function Header() {
   const router = useRouter();
@@ -38,7 +38,7 @@ export default function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/cadastro" className="hover:underline">
+                  <Link href="/register" className="hover:underline">
                     Cadastre-se
                   </Link>
                 </li>

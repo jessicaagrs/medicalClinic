@@ -9,11 +9,22 @@ type ButtonProps = Readonly<{
   backgroundColor?: string;
   id?: string;
   ariaLabel?: string;
+  type?: 'button' | 'submit' | 'reset';
 }>;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { children, onClick, width, height, color, backgroundColor, id, ariaLabel },
+    {
+      children,
+      onClick,
+      width,
+      height,
+      color,
+      backgroundColor,
+      id,
+      ariaLabel,
+      ...rest
+    },
     ref
   ) => {
     return (
@@ -23,6 +34,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         id={id}
         className={`${width ?? 'w-24'} ${height ?? 'h-10'} ${backgroundColor ?? 'bg-custom10'} ${color ?? 'text-custom30'} flex justify-center items-center rounded-lg hover:bg-custom20 transition-colors duration-300`}
         onClick={onClick}
+        {...rest}
       >
         {children}
       </button>

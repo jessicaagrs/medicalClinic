@@ -9,7 +9,7 @@ export async function middleware(req: NextRequest) {
   if (
     pathname === '/' ||
     pathname === '/login' ||
-    pathname === '/cadastro' ||
+    pathname === '/register' ||
     pathname === '/about'
   ) {
     if (token && pathname === '/') {
