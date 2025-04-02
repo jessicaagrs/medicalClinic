@@ -1,14 +1,25 @@
-type InputProps = {
-  readonly type: 'text' | 'number' | 'email' | 'password' | 'search';
-  readonly value: string | number;
-  readonly name: string;
-  readonly placeholder: string;
-  readonly classname: string;
-  readonly disabled?: boolean;
-  readonly id?: string;
-  readonly onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  readonly onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+type InputProps = Readonly<{
+  type:
+    | 'text'
+    | 'number'
+    | 'email'
+    | 'password'
+    | 'search'
+    | 'tel'
+    | 'url'
+    | 'checkbox'
+    | 'radio';
+  value: string | number;
+  name: string;
+  placeholder?: string;
+  classname: string;
+  disabled?: boolean;
+  id?: string;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
+  checked?: boolean;
+}>;
 
 export default function Input({
   type,
@@ -20,6 +31,9 @@ export default function Input({
   disabled,
   onChange,
   onKeyDown,
+  required = false,
+  checked = false,
+  ...rest
 }: InputProps) {
   return (
     <input
@@ -32,6 +46,9 @@ export default function Input({
       disabled={disabled}
       className={`input ${classname}`}
       onKeyDown={onKeyDown}
+      required={required}
+      checked={checked}
+      {...rest}
     />
   );
 }

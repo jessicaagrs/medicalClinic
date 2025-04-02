@@ -6,8 +6,10 @@ import { useLoading } from '@/hooks/useLoading';
 import { useModal } from '@/hooks/useModal';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { AroundForm } from '../globals/AroundForm';
 
 export default function FormLogin({ clinic }: { readonly clinic?: string }) {
   const [email, setEmail] = useState('');
@@ -62,91 +64,91 @@ export default function FormLogin({ clinic }: { readonly clinic?: string }) {
   };
 
   return (
-    <main className="bg-[url(/background/Background.png)] h-screen flex justify-center">
-      <div className="bg-custom30 w-full sm:max-w-[700px] flex flex-col items-center">
-        <form
-          onSubmit={handleSubmitLogin}
-          className="mb-4"
-          data-testid="login-form"
+    <AroundForm>
+      <form
+        onSubmit={handleSubmitLogin}
+        className="mb-4"
+        data-testid="login-form"
+      >
+        <div className="mt-10 flex flex-col items-center gap-14">
+          <Image src="/icons/Logo.svg" alt="Logo" width={140} height={40} />
+          <h1 className="text-base sm:text-2xl font-bold text-center text-custom80">
+            Faça login em sua conta
+          </h1>
+        </div>
+        <fieldset className="sm:max-w-[500px] max-w-[300px]">
+          <div className="flex flex-col gap-2 mt-10">
+            <label htmlFor="email">Email</label>
+            <Input
+              id="email"
+              classname="h-12 pl-5 bg-custom70 outline-none rounded-lg"
+              name="email"
+              type="text"
+              placeholder="Insira seu endereço de email"
+              value={email}
+              onChange={handleChangeEmail}
+            />
+          </div>
+          <div className="flex flex-col gap-2 mt-5">
+            <label htmlFor="password">Senha</label>
+            <Input
+              id="password"
+              classname="h-12 pl-5 bg-custom70 outline-none rounded-lg"
+              name="password"
+              type="password"
+              placeholder="Insira sua senha"
+              value={password}
+              onChange={handleChangePassword}
+            />
+          </div>
+          <div className="flex flex-col items-center gap-2 mt-5">
+            <Button className="w-64" ariaLabel="Entrar">
+              {isLoading ? componentLoading() : 'Entrar'}
+            </Button>
+          </div>
+        </fieldset>
+      </form>
+      {!clinic && (
+        <Button
+          className="w-64 py-5"
+          onClick={handleGoogleLogin}
+          ariaLabel="Entrar com Google"
         >
-          <div className="mt-10 flex flex-col items-center gap-14">
-            <Image src="/icons/Logo.svg" alt="Logo" width={140} height={40} />
-            <h1 className="text-base sm:text-2xl font-bold text-center text-custom80">
-              Faça login em sua conta
-            </h1>
-          </div>
-          <div className="sm:max-w-[500px] max-w-[300px]">
-            <div className="flex flex-col gap-2 mt-10">
-              <label htmlFor="email">Email</label>
-              <Input
-                id="email"
-                classname="h-12 pl-5 bg-custom70 outline-none rounded-lg"
-                name="email"
-                type="text"
-                placeholder="Insira seu endereço de email"
-                value={email}
-                onChange={handleChangeEmail}
+          {isLoadingGoogle ? (
+            'Aguarde...'
+          ) : (
+            <>
+              <Image
+                src="/icons/Google.svg"
+                alt="Google"
+                width={20}
+                height={20}
               />
-            </div>
-            <div className="flex flex-col gap-2 mt-5">
-              <label htmlFor="password">Senha</label>
-              <Input
-                id="password"
-                classname="h-12 pl-5 bg-custom70 outline-none rounded-lg"
-                name="password"
-                type="password"
-                placeholder="Insira sua senha"
-                value={password}
-                onChange={handleChangePassword}
-              />
-            </div>
-            <div className="flex flex-col items-center gap-2 mt-5">
-              <Button width="w-64" ariaLabel="Entrar">
-                {isLoading ? componentLoading() : 'Entrar'}
-              </Button>
-            </div>
-          </div>
-        </form>
-        {!clinic && (
-          <Button
-            width="w-64"
-            onClick={handleGoogleLogin}
-            ariaLabel="Entrar com Google"
-          >
-            {isLoadingGoogle ? (
-              'Aguarde...'
-            ) : (
-              <>
-                <Image
-                  src="/icons/Google.svg"
-                  alt="Google"
-                  width={20}
-                  height={20}
-                />
-                <span className="ml-2">Entrar com Google</span>
-              </>
-            )}
-          </Button>
-        )}
-        <div className="flex flex-col items-center gap-2 mt-5">
-          <a href="/resetPassword" className="text-sm text-custom10">
-            Esqueceu sua senha?
-          </a>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-2 mt-10">
-          <p>
-            Ainda não tem conta?{' '}
-            <a
-              href="/register"
-              className="text-custom50 font-bold block sm:inline"
-            >
-              Faça seu cadastro!
-            </a>
-          </p>
-        </div>
+              <span className="ml-2">Entrar com Google</span>
+            </>
+          )}
+        </Button>
+      )}
+      <div className="flex flex-col items-center gap-2 mt-5">
+        <a href="/resetPassword" className="text-sm text-custom10">
+          Esqueceu sua senha?
+        </a>
       </div>
-
+      <div className="flex flex-col items-center justify-center gap-2 mt-10">
+        <p>
+          Ainda não tem conta?{' '}
+          <Link
+            href="/register"
+            className="text-custom50 font-bold block sm:inline"
+          >
+            Faça seu cadastro!
+          </Link>
+        </p>
+        <Link href="/" className="text-custom10 hover:underline mt-3">
+          Voltar
+        </Link>
+      </div>
       {isOpen && componentModalError('Erro ao efetuar login', error)}
-    </main>
+    </AroundForm>
   );
 }

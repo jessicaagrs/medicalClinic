@@ -36,7 +36,7 @@ describe('Login Actions', () => {
     jest.clearAllMocks();
   });
 
-  it('should must successfully log in as user', async () => {
+  test('should must successfully log in as user', async () => {
     // Arrange
     (prisma.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
     (bcrypt.compare as jest.Mock).mockResolvedValue(true);
@@ -55,7 +55,7 @@ describe('Login Actions', () => {
     expect(result).toEqual(mockUser);
   });
 
-  it('should successfully login as an expert', async () => {
+  test('should successfully login as an expert', async () => {
     // Arrange
     (prisma.specialist.findUnique as jest.Mock).mockResolvedValue(
       mockSpecialist
@@ -80,7 +80,7 @@ describe('Login Actions', () => {
     expect(result).toEqual(mockSpecialist);
   });
 
-  it('should throw an error when the user is not found', async () => {
+  test('should throw an error when the user is not found', async () => {
     // Arrange
     (prisma.user.findUnique as jest.Mock).mockResolvedValue(null);
 
@@ -93,7 +93,7 @@ describe('Login Actions', () => {
     });
   });
 
-  it('should throw an error when the specialist is not found', async () => {
+  test('should throw an error when the specialist is not found', async () => {
     // Arrange
     (prisma.specialist.findUnique as jest.Mock).mockResolvedValue(null);
 
@@ -106,7 +106,7 @@ describe('Login Actions', () => {
     });
   });
 
-  it('should throw an error when the password is invalid for the user', async () => {
+  test('should throw an error when the password is invalid for the user', async () => {
     // Arrange
     (prisma.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
     (bcrypt.compare as jest.Mock).mockResolvedValue(false);
@@ -121,7 +121,7 @@ describe('Login Actions', () => {
     );
   });
 
-  it('should throw an error when the password is invalid for the specialist', async () => {
+  test('should throw an error when the password is invalid for the specialist', async () => {
     // Arrange
     (prisma.specialist.findUnique as jest.Mock).mockResolvedValue(
       mockSpecialist
@@ -138,7 +138,7 @@ describe('Login Actions', () => {
     );
   });
 
-  it('should handle the case where clinic is "null" (string)', async () => {
+  test('should handle the case where clinic is "null" (string)', async () => {
     // Arrange
     (prisma.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
     (bcrypt.compare as jest.Mock).mockResolvedValue(true);
@@ -157,7 +157,7 @@ describe('Login Actions', () => {
     expect(result).toEqual(mockUser);
   });
 
-  it('should handle the case where clinic is undefined', async () => {
+  test('should handle the case where clinic is undefined', async () => {
     // Arrange
     (prisma.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
     (bcrypt.compare as jest.Mock).mockResolvedValue(true);

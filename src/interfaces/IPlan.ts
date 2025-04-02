@@ -16,3 +16,8 @@ export interface Plan {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface Plans {
+  id: string;
+  name: string;
+}
