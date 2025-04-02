@@ -8,10 +8,10 @@ import { useEffect } from 'react';
 export default function ErrorBoundary({
   error,
   reset,
-}: {
-  readonly error: Error & { digest?: string };
-  readonly reset: () => void;
-}) {
+}: Readonly<{
+  error: Error & { digest?: string };
+  reset: () => void;
+}>) {
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -21,10 +21,10 @@ export default function ErrorBoundary({
       <h2>Ops... ocorreu um erro.</h2>
       <p>{`Detalhes: ${error.message}`}</p>
       <Image src="/icons/Error.svg" width={150} height={150} alt="Error" />
-      <Button onClick={() => reset()} width="w-40">
+      <Button onClick={() => reset()} className="w-40">
         Tentar novamente
       </Button>
-      <Button width="w-40">
+      <Button className="w-40">
         <Link href="/">Voltar ao início</Link>
       </Button>
     </div>

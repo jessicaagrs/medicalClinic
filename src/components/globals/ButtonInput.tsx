@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
-type ButtonInputProps = {
-  readonly onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  readonly classname?: string;
-  readonly iconSrc?: string;
-  readonly iconAlt?: string;
-  readonly seeCancelButton?: boolean;
-};
+type ButtonInputProps = Readonly<{
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  classname?: string;
+  iconSrc?: string;
+  iconAlt?: string;
+  seeCancelButton?: boolean;
+}>;
 
 export default function ButtonInput({
   onClick,

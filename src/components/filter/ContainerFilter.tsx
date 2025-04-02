@@ -17,7 +17,7 @@ export default function ContainerFilter() {
   return (
     <section className="full-width-container shadow-md">
       <form className="flex flex-col md:flex-row justify-center items-center mt-10 gap-6">
-        <div className="flex max-w-[300px] sm:max-w-96 items-center shadow-md rounded-lg relative">
+        <fieldset className="flex max-w-[300px] sm:max-w-96 items-center shadow-md rounded-lg relative">
           <div
             className="w-12 h-12 flex justify-center items-center bg-custom60
             rounded-l-lg absolute -left-2"
@@ -38,8 +38,8 @@ export default function ContainerFilter() {
             onChange={handleOnChangeSearch}
             aria-label="Buscar especialidade"
           />
-        </div>
-        <div className="flex max-w-[300px] sm:max-w-96 items-center shadow-md rounded-lg relative">
+        </fieldset>
+        <fieldset className="flex max-w-[300px] sm:max-w-96 items-center shadow-md rounded-lg relative">
           <div
             className="w-12 h-12 flex justify-center items-center bg-custom60
             rounded-l-lg absolute -left-2"
@@ -60,10 +60,8 @@ export default function ContainerFilter() {
             onChange={(event) => setSearchLocation(event.target.value)}
             aria-label="Buscar localização"
           />
-        </div>
-        <Button height="h-12" width="max-w-[300px] w-96 md:max-w-24">
-          Buscar
-        </Button>
+        </fieldset>
+        <Button className="h-12 max-w-[300px] w-96 md:max-w-24">Buscar</Button>
       </form>
       <SpecialtyFilter />
     </section>

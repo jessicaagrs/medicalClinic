@@ -3,26 +3,22 @@ import React, { forwardRef } from 'react';
 type ButtonProps = Readonly<{
   children: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  width?: string;
-  height?: string;
-  color?: string;
-  backgroundColor?: string;
+  className?: string;
   id?: string;
   ariaLabel?: string;
+  type?: 'button' | 'submit' | 'reset';
 }>;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    { children, onClick, width, height, color, backgroundColor, id, ariaLabel },
-    ref
-  ) => {
+  ({ children, onClick, className, id, ariaLabel, ...rest }, ref) => {
     return (
       <button
         aria-label={ariaLabel}
         ref={ref}
         id={id}
-        className={`${width ?? 'w-24'} ${height ?? 'h-10'} ${backgroundColor ?? 'bg-custom10'} ${color ?? 'text-custom30'} flex justify-center items-center rounded-lg hover:bg-custom20 transition-colors duration-300`}
+        className={` w-24 h-10 bg-custom10  text-custom30 flex justify-center items-center rounded-lg hover:bg-custom20 transition-colors duration-300 ${className}`}
         onClick={onClick}
+        {...rest}
       >
         {children}
       </button>
