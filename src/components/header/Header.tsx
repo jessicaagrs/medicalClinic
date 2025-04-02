@@ -1,11 +1,11 @@
 'use client';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SearchHeader } from './SearchHeader';
-import Button from '../globals/Button';
 import { usePathname, useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import Button from '../globals/Button';
 import MenuUser from '../menu/MenuUser';
+import { SearchHeader } from './SearchHeader';
 
 export default function Header() {
   const router = useRouter();
@@ -38,7 +38,7 @@ export default function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/cadastro" className="hover:underline">
+                  <Link href="/register" className="hover:underline">
                     Cadastre-se
                   </Link>
                 </li>
@@ -50,8 +50,16 @@ export default function Header() {
             <MenuUser />
           ) : (
             <div className="flex gap-4">
-              <Button onClick={handleClickLogin}>Login</Button>
-              <Button onClick={handleClickAcessClinic} width="w-36">
+              <Button
+                onClick={handleClickLogin}
+                className="w-24 sm:w-36 text-sm sm:text-base"
+              >
+                Login
+              </Button>
+              <Button
+                onClick={handleClickAcessClinic}
+                className="w-28 sm:w-36 text-sm sm:text-base"
+              >
                 Acesso Clínica
               </Button>
             </div>

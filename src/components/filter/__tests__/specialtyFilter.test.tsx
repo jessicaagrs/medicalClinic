@@ -13,7 +13,7 @@ describe('SpecialtyFilter', () => {
     'Reumatologista',
   ];
 
-  it('should render all specialties', () => {
+  test('should render all specialties', () => {
     render(<SpecialtyFilter />);
 
     expect(
