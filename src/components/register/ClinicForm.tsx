@@ -63,7 +63,11 @@ export default function ClinicForm({ onClickNextTab }: ClinicFormProps) {
   };
 
   return (
-    <form className="w-full px-8" onSubmit={handleSubmit}>
+    <form
+      className="w-full px-8"
+      onSubmit={handleSubmit}
+      aria-label="Formulário de cadastro da clínica"
+    >
       <fieldset className="flex flex-col gap-2 mt-3">
         <label htmlFor="reason">Razão social</label>
         <Input

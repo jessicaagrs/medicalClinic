@@ -61,7 +61,11 @@ export default function AddressForm() {
   };
 
   return (
-    <form className="w-full px-8" onSubmit={handleSubmit}>
+    <form
+      className="w-full px-8"
+      onSubmit={handleSubmit}
+      aria-label="Formulário de endereço"
+    >
       <fieldset className="flex flex-col gap-2 mt-5">
         <label htmlFor="street">Rua</label>
         <Input

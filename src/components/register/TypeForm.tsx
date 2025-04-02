@@ -22,7 +22,11 @@ export const TypeForm = ({ onClickNextTab }: TypeFormProps) => {
   };
 
   return (
-    <form className="w-full px-8 flex flex-col mt-5" onSubmit={handleSubmit}>
+    <form
+      className="w-full px-8 flex flex-col mt-5"
+      onSubmit={handleSubmit}
+      aria-label="Formulário de seleção de tipo de cadastro"
+    >
       <fieldset>
         <label htmlFor="user" className="flex items-center gap-2">
           <Input

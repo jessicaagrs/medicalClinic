@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../../prisma/db';
+import { SALT } from '@/constants/constants';
 
 export async function POST(request: Request) {
   try {
@@ -36,7 +37,7 @@ export async function POST(request: Request) {
           });
         }
 
-        const passwordEncrypted = await bcrypt.hash(password, 10);
+        const passwordEncrypted = await bcrypt.hash(password, SALT);
 
         await prisma.clinic.create({
           data: {
