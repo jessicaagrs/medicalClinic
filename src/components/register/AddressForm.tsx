@@ -1,6 +1,10 @@
+import { TypeRegister } from '@/enums/enums';
 import { useLoading } from '@/hooks/useLoading';
 import { useModal } from '@/hooks/useModal';
 import useRegisterContext from '@/hooks/useRegisterContext';
+import { clinicService } from '@/services/clinicService';
+import { userService } from '@/services/userService';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Button from '../globals/Button';
@@ -33,13 +37,10 @@ export default function AddressForm() {
     setRegister(register);
 
     try {
-      const response = await fetch('/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(register),
-      });
+      const response =
+        register.typeRegister === TypeRegister.USER
+          ? await userService.createUser(register)
+          : await clinicService.createClinic(register);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -48,7 +49,9 @@ export default function AddressForm() {
       }
 
       stopLoading();
-      router.push('/login');
+
+      if (register.typeRegister === TypeRegister.USER) router.push('/login');
+      else router.push('/login?clinic=true');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       stopLoading();
@@ -59,7 +62,7 @@ export default function AddressForm() {
 
   return (
     <form className="w-full px-8" onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-2 mt-5">
+      <fieldset className="flex flex-col gap-2 mt-5">
         <label htmlFor="street">Rua</label>
         <Input
           id="street"
@@ -71,9 +74,9 @@ export default function AddressForm() {
           onChange={(e) => setStreet(e.target.value)}
           required
         />
-      </div>
-      <div className="flex gap-3 mt-2">
-        <div className="flex flex-col gap-2 mt-5 w-1/2">
+      </fieldset>
+      <fieldset className="flex gap-3 mt-2 flex-col sm:flex-row">
+        <div className="flex flex-col gap-2 mt-5 sm:w-1/2">
           <label htmlFor="numberStreet">Número</label>
           <Input
             id="numberStreet"
@@ -86,7 +89,7 @@ export default function AddressForm() {
             required
           />
         </div>
-        <div className="flex flex-col gap-2 mt-5 w-1/2">
+        <div className="flex flex-col gap-2 mt-5 sm:w-1/2">
           <label htmlFor="state">Estado</label>
           <Input
             id="state"
@@ -99,8 +102,8 @@ export default function AddressForm() {
             required
           />
         </div>
-      </div>
-      <div className="flex flex-col gap-2 my-5">
+      </fieldset>
+      <fieldset className="flex flex-col gap-2 my-5">
         <label htmlFor="complement">Complemento</label>
         <Input
           id="complement"
@@ -111,10 +114,15 @@ export default function AddressForm() {
           value={complement}
           onChange={(e) => setComplement(e.target.value)}
         />
-      </div>
-      <Button width="w-36" ariaLabel="Entrar">
-        {isLoading ? componentLoading() : 'Enviar'}
-      </Button>
+      </fieldset>
+      <fieldset className="flex flex-col items-center gap-5 mt-5">
+        <Button className="w-36" ariaLabel="Entrar">
+          {isLoading ? componentLoading() : 'Enviar'}
+        </Button>
+        <Link href="/" className="hover:underline text-custom10 text-sm mb-3">
+          Voltar a página inicial
+        </Link>
+      </fieldset>
       {isOpen && componentModalError('Erro ao cadastrar novo usuário', error)}
     </form>
   );

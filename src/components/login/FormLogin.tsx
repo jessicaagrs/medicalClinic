@@ -76,7 +76,7 @@ export default function FormLogin({ clinic }: { readonly clinic?: string }) {
             Faça login em sua conta
           </h1>
         </div>
-        <div className="sm:max-w-[500px] max-w-[300px]">
+        <fieldset className="sm:max-w-[500px] max-w-[300px]">
           <div className="flex flex-col gap-2 mt-10">
             <label htmlFor="email">Email</label>
             <Input
@@ -102,15 +102,15 @@ export default function FormLogin({ clinic }: { readonly clinic?: string }) {
             />
           </div>
           <div className="flex flex-col items-center gap-2 mt-5">
-            <Button width="w-64" ariaLabel="Entrar">
+            <Button className="w-64" ariaLabel="Entrar">
               {isLoading ? componentLoading() : 'Entrar'}
             </Button>
           </div>
-        </div>
+        </fieldset>
       </form>
       {!clinic && (
         <Button
-          width="w-64"
+          className="w-64 py-5"
           onClick={handleGoogleLogin}
           ariaLabel="Entrar com Google"
         >

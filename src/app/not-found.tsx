@@ -7,7 +7,7 @@ export default function NotFound() {
     <div className="h-screen flex flex-col gap-5 items-center justify-center">
       <h2>Página não encontrada</h2>
       <Image src="/icons/Attention.svg" width={150} height={150} alt="Error" />
-      <Button width="w-40">
+      <Button className="w-40">
         <Link href="/">Voltar ao início</Link>
       </Button>
     </div>

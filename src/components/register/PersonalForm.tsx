@@ -2,15 +2,21 @@ import { TabNames } from '@/enums/enums';
 import { useModal } from '@/hooks/useModal';
 import useRegisterContext from '@/hooks/useRegisterContext';
 import { Plans } from '@/interfaces/IPlan';
+import {
+  cleanCaracter,
+  formatPhone,
+  isValidEmail,
+  isValidURL,
+} from '@/utils/formatter';
 import { useState } from 'react';
 import Button from '../globals/Button';
 import Input from '../globals/Input';
 import { Select } from '../globals/Select';
 
-type PersonalFormProps = {
-  readonly onClickNextTab: (type: TabNames) => void;
-  readonly options: Plans[];
-};
+type PersonalFormProps = Readonly<{
+  onClickNextTab: (type: TabNames) => void;
+  options: Plans[];
+}>;
 
 export const PersonalForm = ({
   onClickNextTab,
@@ -26,6 +32,7 @@ export const PersonalForm = ({
   const { register, setRegister } = useRegisterContext();
   const { isOpen, componentModalError, openModal } = useModal();
   const [plan, setPlan] = useState('');
+  const [error, setError] = useState('');
 
   const handleClickNextTab = () => {
     onClickNextTab(TabNames.TYPE);
@@ -35,13 +42,32 @@ export const PersonalForm = ({
     e.preventDefault();
 
     if (password !== confirmPassword) {
+      setError('As senhas não coincidem.');
+      openModal();
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('A senha deve ter pelo menos 6 caracteres.');
+      openModal();
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError('Email inválido.');
+      openModal();
+      return;
+    }
+
+    if (!isValidURL(image)) {
+      setError('URL inválida para imagem de perfil.');
       openModal();
       return;
     }
 
     register.havePlan = havePlan;
     register.name = name;
-    register.phone = phone;
+    register.phone = cleanCaracter(phone);
     register.email = email;
     register.image = image;
     register.password = password;
@@ -52,7 +78,7 @@ export const PersonalForm = ({
 
   return (
     <form className="w-full px-8" onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-2 mt-3">
+      <fieldset className="flex flex-col gap-2 mt-3">
         <label htmlFor="name">Nome</label>
         <Input
           id="name"
@@ -64,9 +90,9 @@ export const PersonalForm = ({
           onChange={(e) => setName(e.target.value)}
           required
         />
-      </div>
-      <div className="flex gap-3 mt-2">
-        <div className="flex flex-col gap-2 mt-3 w-1/2">
+      </fieldset>
+      <fieldset className="flex flex-col sm:flex-row gap-3 mt-2">
+        <div className="flex flex-col gap-2 mt-3 sm:w-1/2">
           <label htmlFor="email">Email</label>
           <Input
             id="email"
@@ -79,7 +105,7 @@ export const PersonalForm = ({
             required
           />
         </div>
-        <div className="flex flex-col gap-2 mt-3 w-1/2">
+        <div className="flex flex-col gap-2 mt-3 sm:w-1/2">
           <label htmlFor="phone">Telefone</label>
           <Input
             id="phone"
@@ -88,12 +114,12 @@ export const PersonalForm = ({
             type="tel"
             placeholder="Digite seu telefone"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => setPhone(formatPhone(e.target.value))}
             required
           />
         </div>
-      </div>
-      <div className="flex items-center gap-2 mt-3">
+      </fieldset>
+      <fieldset className="flex items-center gap-2 mt-3">
         <Input
           id="plan"
           classname="h-12 pl-5 bg-custom70 outline-none rounded-lg"
@@ -112,8 +138,8 @@ export const PersonalForm = ({
             required={havePlan}
           />
         )}
-      </div>
-      <div className="flex flex-col gap-2 mt-3">
+      </fieldset>
+      <fieldset className="flex flex-col gap-2 mt-3">
         <label htmlFor="image">Imagem de perfil</label>
         <Input
           id="image"
@@ -125,9 +151,9 @@ export const PersonalForm = ({
           onChange={(e) => setImage(e.target.value)}
           required
         />
-      </div>
-      <div className="flex gap-3 mt-2">
-        <div className="flex flex-col gap-2 mt-3 w-1/2">
+      </fieldset>
+      <fieldset className="flex gap-3 mt-2 flex-col sm:flex-row">
+        <div className="flex flex-col gap-2 mt-3 sm:w-1/2">
           <label htmlFor="password">Criar uma senha</label>
           <Input
             id="password"
@@ -140,7 +166,7 @@ export const PersonalForm = ({
             required
           />
         </div>
-        <div className="flex flex-col gap-2 mt-3 w-1/2">
+        <div className="flex flex-col gap-2 mt-3 sm:w-1/2">
           <label htmlFor="confirmPassword">Repetir a senha</label>
           <Input
             id="confirmPassword"
@@ -153,25 +179,24 @@ export const PersonalForm = ({
             required
           />
         </div>
-      </div>
-      <div className="flex items-center justify-between gap-2 mt-5">
+      </fieldset>
+      <fieldset className="flex items-center justify-between gap-2 my-5">
         <Button
-          width="w-36"
+          className="w-24 sm:w-36 text-sm sm:text-base"
           ariaLabel="Entrar"
           type="button"
           onClick={handleClickNextTab}
         >
           Recomeçar
         </Button>
-        <Button width="w-36" ariaLabel="Entrar">
+        <Button
+          className="w-24 sm:w-36 text-sm sm:text-base"
+          ariaLabel="Entrar"
+        >
           Avançar
         </Button>
-      </div>
-      {isOpen &&
-        componentModalError(
-          'Erro ao cadastrar novo usuário',
-          'As senhas não coincidem.'
-        )}
+      </fieldset>
+      {isOpen && componentModalError('Erro ao cadastrar novo usuário', error)}
     </form>
   );
 };

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { AroundForm } from '../globals/AroundForm';
 import AddressForm from './AddressForm';
+import ClinicForm from './ClinicForm';
 import { PersonalForm } from './PersonalForm';
 import { Tabs } from './Tabs';
 import { TypeForm } from './TypeForm';
@@ -21,11 +22,12 @@ export default function FormRegister({ dataPlans }: FormRegisterProps) {
   return (
     <RegisterContextProvider>
       <AroundForm>
-        <div className="mt-3 flex flex-col items-center gap-14">
+        <div className="mt-5 flex flex-col items-center gap-14">
           <Image src="/icons/Logo.svg" alt="Logo" width={140} height={40} />
         </div>
         <Tabs selectedTab={tab} />
         {tab === TabNames.TYPE && <TypeForm onClickNextTab={setTab} />}
+        {tab === TabNames.CLINIC && <ClinicForm onClickNextTab={setTab} />}
         {tab === TabNames.PERSONAL && (
           <PersonalForm onClickNextTab={setTab} options={dataPlans} />
         )}

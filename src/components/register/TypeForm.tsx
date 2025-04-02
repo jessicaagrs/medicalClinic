@@ -1,4 +1,4 @@
-import { TabNames } from '@/enums/enums';
+import { TabNames, TypeRegister } from '@/enums/enums';
 import useRegisterContext from '@/hooks/useRegisterContext';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -10,19 +10,20 @@ type TypeFormProps = {
 };
 
 export const TypeForm = ({ onClickNextTab }: TypeFormProps) => {
-  const [type, setType] = useState('user');
+  const [type, setType] = useState(TypeRegister.USER);
   const { setRegister, register } = useRegisterContext();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     register.typeRegister = type;
     setRegister(register);
-    onClickNextTab(TabNames.PERSONAL);
+    if (type === TypeRegister.CLINIC) onClickNextTab(TabNames.CLINIC);
+    else onClickNextTab(TabNames.PERSONAL);
   };
 
   return (
     <form className="w-full px-8 flex flex-col mt-5" onSubmit={handleSubmit}>
-      <div>
+      <fieldset>
         <label htmlFor="user" className="flex items-center gap-2">
           <Input
             id="user"
@@ -30,13 +31,13 @@ export const TypeForm = ({ onClickNextTab }: TypeFormProps) => {
             name="user"
             type="radio"
             value="user"
-            checked={type === 'user'}
-            onChange={(e) => setType(e.target.value)}
+            checked={type === TypeRegister.USER}
+            onChange={() => setType(TypeRegister.USER)}
           />
           Cliente
         </label>
-      </div>
-      <div>
+      </fieldset>
+      <fieldset>
         <label htmlFor="specialist" className="flex items-center gap-2">
           <Input
             id="specialist"
@@ -44,20 +45,23 @@ export const TypeForm = ({ onClickNextTab }: TypeFormProps) => {
             name="specialist"
             type="radio"
             value="specialist"
-            checked={type === 'specialist'}
-            onChange={(e) => setType(e.target.value)}
+            checked={type === TypeRegister.CLINIC}
+            onChange={() => setType(TypeRegister.CLINIC)}
           />
-          Especialista
+          Clínica
         </label>
-      </div>
-      <div className="flex flex-col items-center gap-2 mt-5">
-        <Button width="w-64" ariaLabel="Entrar">
+      </fieldset>
+      <fieldset className="flex flex-col items-center gap-2 mt-5">
+        <Button
+          className="w-24 sm:w-36 text-sm sm:text-base"
+          ariaLabel="Entrar"
+        >
           Avançar
         </Button>
         <Link href="/" className="hover:underline text-custom10 text-sm mt-6">
           Voltar a página inicial
         </Link>
-      </div>
+      </fieldset>
     </form>
   );
 };

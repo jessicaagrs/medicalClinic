@@ -19,6 +19,7 @@ type RegisterContextType = {
   password: string;
   confirmPassword: string;
   address: AddressContextType;
+  cnpj: string;
 };
 
 export const RegisterContext = createContext({

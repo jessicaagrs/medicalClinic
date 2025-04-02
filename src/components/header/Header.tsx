@@ -50,8 +50,16 @@ export default function Header() {
             <MenuUser />
           ) : (
             <div className="flex gap-4">
-              <Button onClick={handleClickLogin}>Login</Button>
-              <Button onClick={handleClickAcessClinic} width="w-36">
+              <Button
+                onClick={handleClickLogin}
+                className="w-24 sm:w-36 text-sm sm:text-base"
+              >
+                Login
+              </Button>
+              <Button
+                onClick={handleClickAcessClinic}
+                className="w-28 sm:w-36 text-sm sm:text-base"
+              >
                 Acesso Clínica
               </Button>
             </div>
